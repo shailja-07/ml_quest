@@ -3,8 +3,17 @@ from fastapi.responses import JSONResponse
 import cv2
 import numpy as np
 import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[""],  
+    allow_credentials=True,
+    allow_methods=["*"], 
+    allow_headers=["*"],  
+)
 
 @app.post("/detect-nail-shape/")
 async def detect_nail_shape(file: UploadFile = File(...)):
